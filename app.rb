@@ -26,9 +26,25 @@ get("/stores/:id")do
   erb(:store_info)
 end
 
-patch("/stores/:id") do
-  store_name = params.fetch('store_name')
-  @store = Store.find(params.fetch("id").to_i)
-  @store = Store.update(:store_name => store_name)
+post("/brands")do
+  shoe_name = params.fetch("shoe_name")
+  store_id = params.fetch("store_id").to_i()
+  @store = Store.find(params.fetch(store_id))
+  @brand = Brand.create({:shoe_name => shoe_name, :store_id => store_id})
   erb(:store_info)
+end
+
+patch("/stores/:id/edit") do
+  @store = Store.find(params.fetch("id").to_i())
+  store_name = params.fetch("store_name")
+  @store = Store.update({:store_name => store_name})
+  @stores = Store.all()
+  erb(:stores_page)
+end
+
+delete("/stores/:id/edit") do
+  @store = Store.find(params.fetch("id").to_i())
+  @store.delete()
+  @stores = Store.all()
+  erb(:stores_page)
 end

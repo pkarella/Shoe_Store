@@ -1,10 +1,40 @@
 
 <h1> <%=@store.store_name()%> </h1>
+  <ul>
+<% if @store.brands().each() do |brand| %>
+  <li><%=brand.shoe_name()%></li>
+  <%end%>
+  <%end%>
+</ul>
+  <%else%>
+  <p>
+    There are no brands yet
+  </p>
+  <%end%>
 
-<form action="/stores/<%= @store.id() %>" method="post">
+  <form action="/brands" method="post">
+    <input id="store_id"type="hidden" name="store_id" value="<%= @store.id() %>">
+    <label for="shoe_name">Enter the shoe brand</label>
+    <input id="shoe_name"type="text" name="shoe_name" value="">
+    <button type="submit">Add Shoes</button>
+
+  </form>
+
+
+
+
+
+
+
+<form action="/stores/<%= @store.id() %>/edit" method="post">
   <input name="_method" type="hidden" value="patch">
   <label for="store_name">Rename your store:</label>
   <input id="store_name" name="store_name" type="text">
 
-    <button type="submit">delete</button>
+    <button type="submit">update</button>
+</form>
+<form action="/stores/<%= @store.id() %>/edit" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete store</button>
 </form>
