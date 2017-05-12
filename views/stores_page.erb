@@ -1,0 +1,17 @@
+<div class="well">
+  <% if @stores.any?()%>
+    <h3>Click here to edit</h3>
+    <ul>
+      <%@stores.each() do |single_store|%>
+      <li><a href= "/stores/<%=single_store.id()%>"><%=single_store.store_name()%></a></li>
+    </ul>
+    <%end%>
+    <%end%>
+</div>
+
+
+<form action="/stores" method="post">
+  <label for="store_name">Enter the name of your store</label>
+  <input type="text" name="store_name">
+  <button type="submit">Add</button>
+</form>
