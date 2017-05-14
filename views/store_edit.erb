@@ -1,5 +1,8 @@
 
-<h1> <%=@store.store_name()%> </h1>
+<h1> <%=@store.store_name()%><a href="/stores/<%= @store.id()%>">Click Here to add brand</a> </h1>
+
+
+
 
 
 <form action="/stores/<%= @store.id() %>/edit" method="post">
