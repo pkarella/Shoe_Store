@@ -5,6 +5,8 @@ class Store < ActiveRecord::Base
 
 private
   define_method(:capitalize_store_name) do
-    self.store_name= (store_name().capitalize())
-  end
+    self.store_name= (store_name().each()do|store|
+    store.capitalize()
+  end)
+end
   end
