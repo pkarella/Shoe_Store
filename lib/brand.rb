@@ -1,10 +1,13 @@
 class Brand < ActiveRecord::Base
-   belongs_to(:store)
-   validates(:shoe_name, {:presence => true, :length => {:maximum => 51}})
+ has_many :prices
+ has_many :stores, through: :prices
 
+ validates(:shoe_name, {:presence => true, :uniqueness => true, :length => { :maximum => 100 }})
+ before_save(:capitalize_shoe)
 
+ private
 
-   private
-     define_method(:capitalize_store_name) do
-    end
+ def capitalize_shoe
+   self.shoe_name = (shoe_name().capitalize())
+ end
 end
