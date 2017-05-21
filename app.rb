@@ -60,6 +60,15 @@ patch("/brands/:id") do
   erb(:brands_info)
 end
 
+delete("/brands/:id") do
+  @brands = Brand.all()
+  @brand = Brand.find(params.fetch("id").to_i())
+  @brand.delete()
+  @stores = Store.all()
+  erb(:brands)
+end
+
+
 patch("/stores/:id") do
   store_id = params.fetch("id").to_i()
   @store = Store.find(store_id)
@@ -69,8 +78,9 @@ patch("/stores/:id") do
   erb(:store_info)
 end
 delete("/stores/:id") do
+  @stores = Store.all()
   @store = Store.find(params.fetch("id").to_i())
   @store.delete()
   @brands = Brand.all()
-  erb(:store_info)
+  erb(:stores)
 end

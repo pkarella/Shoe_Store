@@ -1,7 +1,8 @@
 class Brand < ActiveRecord::Base
  has_many :prices
  has_many :stores, through: :prices
-
+ 
+validates :shoe_name, uniqueness:{case_sensitive: false}
  validates(:shoe_name, {:presence => true, :uniqueness => true, :length => { :maximum => 100 }})
  before_save(:capitalize_shoe)
 

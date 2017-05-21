@@ -8,7 +8,10 @@
 <% if @stores.any?() %>
   <form action="/brands/<%= @brand.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
-
+    <form action="/brands/<%= @brand.id() %>" method="post">
+           <input name="_method" type="hidden" value="delete">
+           <button type="submit">Delete Brand</button>
+     </form>
     <% @stores.each() do |store| %>
       <div class="checkbox">
         <label>
