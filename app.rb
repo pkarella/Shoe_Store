@@ -5,7 +5,7 @@ require('pry')
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 require('./lib/brand')
 require('./lib/store')
-require('./lib/price')
+
 
 get("/") do
   @brands = Brand.all()
@@ -56,6 +56,7 @@ patch("/brands/:id") do
   @brand = Brand.find(brand_id)
   store_ids = params.fetch("store_ids")
   @brand.update({:store_ids => store_ids})
+  @brands = Brand.all()
   @stores = Store.all()
   erb(:brands_info)
 end
@@ -77,6 +78,7 @@ patch("/stores/:id") do
   @brands = Brand.all()
   erb(:store_info)
 end
+
 delete("/stores/:id") do
   @stores = Store.all()
   @store = Store.find(params.fetch("id").to_i())

@@ -1,6 +1,5 @@
 class Store < ActiveRecord::Base
-  has_many :prices
-    has_many :brands, through: :prices
+has_and_belongs_to_many(:brands)
 
     validates :store_name, uniqueness:{case_sensitive: false}
     validates(:store_name, {:presence => true, :uniqueness => true, :length => { :maximum => 100 }})
