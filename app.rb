@@ -55,6 +55,7 @@ patch("/brands/:id") do
   brand_id = params.fetch("id").to_i()
   @brand = Brand.find(brand_id)
   store_ids = params.fetch("store_ids")
+
   @brand.update({:store_ids => store_ids})
   @brands = Brand.all()
   @stores = Store.all()
@@ -74,8 +75,14 @@ patch("/stores/:id") do
   store_id = params.fetch("id").to_i()
   @store = Store.find(store_id)
   brand_ids = params.fetch("brand_ids")
-  @store.update({:brand_ids => brand_ids})
+
+  brand_ids.each() do |brand_id|
+    found_brand = Brand.find(brand_id.to_i)
+    @store.brands.push(found_brand)
+  end
+end
   @brands = Brand.all()
+
   erb(:store_info)
 end
 
